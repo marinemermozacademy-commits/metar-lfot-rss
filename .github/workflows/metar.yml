@@ -1,0 +1,35 @@
+name: METAR LFOT update
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate METAR RSS
+        env:
+          CHECKWX_API_KEY: ${{ secrets.CHECKWX_API_KEY }}
+        run: python generate_rss.py
+
+      - name: Commit file
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add metar.xml
+          git commit -m "update METAR" || echo "no change"
+          git push
