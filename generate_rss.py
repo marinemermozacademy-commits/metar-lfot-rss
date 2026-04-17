@@ -13,7 +13,7 @@ metar_data = requests.get(metar_url, headers=headers).json()
 metar = metar_data["data"][0]
 
 # TAF
-taf_url = f"https://api.checkwx.com/taf/{ICAO}"
+taf_url = f"https://api.checkwx.com/v2/taf/{ICAO}/raw"
 taf_data = requests.get(taf_url, headers=headers).json()
 taf = taf_data["data"][0]
 
