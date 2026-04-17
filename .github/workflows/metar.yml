@@ -31,11 +31,8 @@ jobs:
           CHECKWX_API_KEY: ${{ secrets.CHECKWX_API_KEY }}
         run: python generate_rss.py
 
-      - name: Commit file
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git add metar.xml
-          git diff --cached --quiet && exit 0
-          git commit -m "update METAR"
-          git push
+           - name: Commit and push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "metar.xml"
+          message: "update METAR"
