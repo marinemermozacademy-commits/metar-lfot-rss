@@ -27,14 +27,12 @@ description = f"""LFOT<br><br>
 rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-<title>METAR/TAF LFOT</title>
-<description>Briefing météo aéronautique LFOT</description>
-<lastBuildDate>{now}</lastBuildDate>
+<title>METAR LFOT</title>
+<description>Briefing météo LFOT</description>
 
 <item>
-<title>LFOT - Météo aviation</title>
+<title>METAR LFOT</title>
 <description>{description}</description>
-<pubDate>{now}</pubDate>
 </item>
 
 </channel>
