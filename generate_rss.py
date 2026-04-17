@@ -23,9 +23,11 @@ if "data" in taf_data and len(taf_data["data"]) > 0:
     taf = taf_data["data"][0]
 
 # FORMAT AFFICHAGE SIGNAO
-description = f"""LFOT<br><br>
-🟢 {metar.replace("METAR ", "")}<br><br>
-🟡 {taf.replace("TAF ", "")}
+description = f"""LFOT
+
+🟢 {metar}
+
+🟡 {taf}
 """
 
 rss = f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -41,6 +43,7 @@ rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 </channel>
 </rss>
 """
+rss = rss.strip()
 
-with open("metar.xml", "w") as f:
+with open("metar.xml", "w", encoding="utf-8", newline="\n") as f:
     f.write(rss)
