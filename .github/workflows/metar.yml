@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -31,7 +29,7 @@ jobs:
           CHECKWX_API_KEY: ${{ secrets.CHECKWX_API_KEY }}
         run: python generate_rss.py
 
-           - name: Commit and push changes
+      - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
         with:
           add: "metar.xml"
