@@ -23,9 +23,7 @@ if "data" in taf_data and len(taf_data["data"]) > 0:
     taf = taf_data["data"][0]
 
 # FORMAT AFFICHAGE SIGNAO
-description = f"""
-
-🟢 {metar}
+description = f"""🟢 {metar}
 
 🟡 {taf}
 """
