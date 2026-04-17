@@ -2,13 +2,15 @@
 <rss version="2.0">
 <channel>
 <title>METAR LFOT</title>
-<description>METAR Tours Val de Loire</description>
-<link>https://github.com/LFOT</link>
-<lastBuildDate>Fri, 17 Apr 2026 10:42:13 GMT</lastBuildDate>
+<description>Briefing météo LFOT</description>
+
 <item>
-<title>LFOT METAR</title>
-<description>METAR LFOT 171030Z AUTO 12005KT 080V160 CAVOK 19/09 Q1022 NOSIG</description>
-<pubDate>Fri, 17 Apr 2026 10:42:13 GMT</pubDate>
+<title>METAR LFOT</title>
+<description>LFOT<br><br>
+🟢 METAR LFOT 171230Z AUTO 14004KT 090V200 CAVOK 21/09 Q1021 NOSIG<br><br>
+🟡 TAF LFOT 171100Z 1712/1812 13004KT CAVOK
+</description>
 </item>
+
 </channel>
 </rss>
