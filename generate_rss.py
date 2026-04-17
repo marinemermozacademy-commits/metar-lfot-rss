@@ -19,11 +19,9 @@ taf = taf_data["data"][0]
 
 now = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
 
-description = f"""🟢 METAR LFOT
-{metar}
-
-🟡 TAF LFOT
-{taf}
+description = f"""LFOT<br><br>
+🟢 METAR {metar.replace("METAR ", "")}<br><br>
+🟡 TAF {taf.replace("TAF ", "")}
 """
 
 rss = f"""<?xml version="1.0" encoding="UTF-8"?>
