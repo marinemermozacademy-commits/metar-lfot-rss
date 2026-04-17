@@ -5,27 +5,40 @@ from datetime import datetime
 API_KEY = os.environ["CHECKWX_API_KEY"]
 ICAO = "LFOT"
 
-url = f"https://api.checkwx.com/metar/{ICAO}"
 headers = {"X-API-Key": API_KEY}
 
-r = requests.get(url, headers=headers)
-data = r.json()
+# METAR
+metar_url = f"https://api.checkwx.com/metar/{ICAO}"
+metar_data = requests.get(metar_url, headers=headers).json()
+metar = metar_data["data"][0]
 
-metar = data["data"][0]
+# TAF
+taf_url = f"https://api.checkwx.com/taf/{ICAO}"
+taf_data = requests.get(taf_url, headers=headers).json()
+taf = taf_data["data"][0]
+
 now = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+description = f"""🟢 METAR LFOT
+{metar}
+
+🟡 TAF LFOT
+{taf}
+"""
 
 rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-<title>METAR LFOT</title>
-<description>METAR Tours Val de Loire</description>
-<link>https://github.com/{ICAO}</link>
+<title>METAR/TAF LFOT</title>
+<description>Briefing météo aéronautique LFOT</description>
 <lastBuildDate>{now}</lastBuildDate>
+
 <item>
-<title>LFOT METAR</title>
-<description>{metar}</description>
+<title>LFOT - Météo aviation</title>
+<description>{description}</description>
 <pubDate>{now}</pubDate>
 </item>
+
 </channel>
 </rss>
 """
