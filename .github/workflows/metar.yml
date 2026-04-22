@@ -1,4 +1,4 @@
-name: METAR LFOT update v2
+name: METAR LFOT update v3
 
 on:
   schedule:
