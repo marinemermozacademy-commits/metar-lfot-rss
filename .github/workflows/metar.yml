@@ -1,4 +1,4 @@
-name: METAR LFOT update v3
+name: METAR LFOT update v4
 
 on:
   schedule:
@@ -18,13 +18,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Git identity
+      - name: Setup Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Pull latest changes
-        run: git pull origin main
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -42,21 +39,11 @@ jobs:
       - name: Stage changes
         run: git add metar.xml
 
-      - name: Check if changes exist
-        id: diff
+      - name: Commit if changes exist
         run: |
           if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes"
           else
-            echo "changed=true" >> $GITHUB_OUTPUT
+            git commit -m "update METAR [v4]"
+            git push
           fi
-
-      - name: Commit changes
-        if: steps.diff.outputs.changed == 'true'
-        run: |
-          git commit -m "update METAR [v2]"
-
-      - name: Push changes
-        if: steps.diff.outputs.changed == 'true'
-        run: |
-          git push origin main
