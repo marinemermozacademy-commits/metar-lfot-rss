@@ -16,6 +16,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Pull latest changes
+        run: git pull
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -29,7 +32,13 @@ jobs:
           CHECKWX_API_KEY: ${{ secrets.CHECKWX_API_KEY }}
         run: python generate_rss.py
 
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet metar.xml || echo "changed=true" >> $GITHUB_OUTPUT
+
       - name: Commit and push changes
+        if: steps.diff.outputs.changed == 'true'
         uses: EndBug/add-and-commit@v9
         with:
           add: "metar.xml"
