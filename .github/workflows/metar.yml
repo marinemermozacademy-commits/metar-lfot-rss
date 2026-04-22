@@ -1,8 +1,8 @@
-name: METAR LFOT update
+name: METAR LFOT update v2
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,9 +15,16 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Pull latest changes
-        run: git pull
+        run: git pull origin main
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -32,14 +39,24 @@ jobs:
           CHECKWX_API_KEY: ${{ secrets.CHECKWX_API_KEY }}
         run: python generate_rss.py
 
-      - name: Check for changes
+      - name: Stage changes
+        run: git add metar.xml
+
+      - name: Check if changes exist
         id: diff
         run: |
-          git diff --quiet metar.xml || echo "changed=true" >> $GITHUB_OUTPUT
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Commit and push changes
+      - name: Commit changes
         if: steps.diff.outputs.changed == 'true'
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "metar.xml"
-          message: "update METAR"
+        run: |
+          git commit -m "update METAR [v2]"
+
+      - name: Push changes
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git push origin main
