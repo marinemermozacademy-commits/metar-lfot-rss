@@ -2,14 +2,14 @@
 <rss version="2.0">
 <channel>
 <title>METAR LFOT</title>
-<lastBuildDate>2026-08-23 01:23:50 UTC</lastBuildDate>
+<lastBuildDate>2026-08-23 02:41:21 UTC</lastBuildDate>
 
 <item>
 <title>LFOT METAR/TAF</title>
-<description>🟢 METAR LFOT 230100Z AUTO 05010KT 020V080 CAVOK 17/09 Q1021 NOSIG
+<description>🟢 METAR LFOT 230230Z AUTO 06011KT CAVOK 17/10 Q1021 NOSIG
 
 🟡 TAF LFOT 222300Z 2300/2324 06012KT CAVOK</description>
-<pubDate>2026-08-23 01:23:50 UTC</pubDate>
+<pubDate>2026-08-23 02:41:21 UTC</pubDate>
 </item>
 
 </channel>
